@@ -38,6 +38,9 @@ gulp.task('watch',function(){
 	gulp.watch('app/scss/**/*.scss',['scss-compile']);
 	gulp.watch('app/coffee/**/*.coffee',['coffee-compile']);
 	gulp.watch('app/views/**/*.hbs',['hbs-compile']);
+});
+
+gulp.task('serve',['watch'],function(){
 	gulp.src('build')
 		.pipe(livereload({
 			livereload:true,
