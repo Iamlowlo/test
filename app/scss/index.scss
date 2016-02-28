@@ -1,5 +1,16 @@
-$teal:lightblue;
+@import 'reset';
+@import 'variables';
+@import 'fonts';
+
+@import 'components/product_list';
 
 body{
-	background: $teal;
+	background: $polite_white;
+	font-family: 'Raleway'
+}
+
+#main_header{
+	background: $color1_darkGrey;
+	color: white;
+	padding: 1.15em;
 }
