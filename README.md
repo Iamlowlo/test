@@ -5,4 +5,4 @@ It uses the following tools: Gulp, Livereload, Handlebars, Scss and Coffescript.
 ## Get Started:
 - `npm install`
 - `gulp serve`  
-It will open the default browser on localhost:8000 the file `build/index.html`
+It will open the file `build/index.html` with the default browser on localhost:8000
