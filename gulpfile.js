@@ -4,16 +4,19 @@ var gulp = require('gulp'),
 	handlebars = require('gulp-compile-handlebars'),
 	grename = require('gulp-rename'),
 	livereload = require('gulp-server-livereload'),
+	plumber = require('gulp-plumber'),
 	gutil = require('gulp-util');
 
 gulp.task('scss-compile',function(){
 	gulp.src('app/scss/*.scss')
+		.pipe(plumber())
 		.pipe(scss())
 		.pipe(gulp.dest('build/css'));
 });
 
 gulp.task('coffee-compile',function(){
 	gulp.src('app/coffee/*.coffee')
+		.pipe(plumber())
 		.pipe(coffee({bare:true}).on('error',gutil.log))
 		.pipe(gulp.dest('build/scripts'));
 });
@@ -29,6 +32,7 @@ gulp.task('hbs-compile',function(){
 			}
 		};
 	gulp.src('app/views/*.hbs')
+		.pipe(plumber())
 		.pipe(handlebars(templateData,hbsOptions))
 		.pipe(grename(function(path){path.extname='.html'}))
 		.pipe(gulp.dest('build'));
