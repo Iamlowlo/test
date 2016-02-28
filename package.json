@@ -1,0 +1,21 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "checkout test on coffescript",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Iamlowlo/test.git"
+  },
+  "author": "Carlos Lopez",
+  "homepage": "https://github.com/Iamlowlo/test#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-coffee": "^2.3.1",
+    "gulp-compile-handlebars": "^0.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-server-livereload": "^1.7.0",
+    "gulp-util": "^3.0.7"
+  }
+}
