@@ -5,7 +5,8 @@ var gulp = require('gulp'),
 	grename = require('gulp-rename'),
 	livereload = require('gulp-server-livereload'),
 	plumber = require('gulp-plumber'),
-	gutil = require('gulp-util');
+	gutil = require('gulp-util'),
+	appConfig = require('./appConfig');
 
 gulp.task('scss-compile',function(){
 	gulp.src('app/scss/*.scss')
@@ -22,9 +23,8 @@ gulp.task('coffee-compile',function(){
 });
 
 gulp.task('hbs-compile',function(){
-	var templateData= {
-			test: 'test'
-		},
+	console.log(appConfig);
+	var templateData= appConfig,
 		hbsOptions = {
 			ignorePartials : true,
 			batch : ['./app/views/partials'],
