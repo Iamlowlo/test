@@ -3,9 +3,77 @@
 <head>
 	<title>Checkout test</title>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="scripts/checkout.js"></script>
 </head>
 <body>
 <header id="main_header">
 	<h1>Cabify test checkout</h1>
-</header></body>
+</header><main>
+	<div class="column_container">
+		<section id="available_product_list" class="col_xs_12_12 col_md_6_12">
+			<h1>Available products</h1>
+			<ul class="product_list">
+				<li class="listed_product column_container">
+					<div class="img_container col_xs_1_12">
+						<span class="fi flaticon-voucher"></span>
+					</div>
+					<span class="product_name col_xs_5_12">Voucher</span><span class="price col_xs_4_12">5</span>
+					<div class="button_container col_xs_2_12">
+						<button type="button" class="add_product btn primary xs" data-product-name="Voucher">+</button>
+					</div>
+				</li>				<li class="listed_product column_container">
+					<div class="img_container col_xs_1_12">
+						<span class="fi flaticon-tshirt"></span>
+					</div>
+					<span class="product_name col_xs_5_12">T-shirt</span><span class="price col_xs_4_12">20</span>
+					<div class="button_container col_xs_2_12">
+						<button type="button" class="add_product btn primary xs" data-product-name="T-shirt">+</button>
+					</div>
+				</li>				<li class="listed_product column_container">
+					<div class="img_container col_xs_1_12">
+						<span class="fi flaticon-mug"></span>
+					</div>
+					<span class="product_name col_xs_5_12">Mug</span><span class="price col_xs_4_12">7.5</span>
+					<div class="button_container col_xs_2_12">
+						<button type="button" class="add_product btn primary xs" data-product-name="Mug">+</button>
+					</div>
+				</li>			</ul>
+		</section>
+		<section id="cart_totals" class="col_xs_12_12 col_md_6_12">
+			<h1>Checkout totals</h1>
+			<ul class="product_list">
+				<li>No products added</li>
+				<li id="Voucher" class="listed_product column_container unvisible">
+					<div class="img_container col_xs_1_12">
+						<span class="fi flaticon-voucher"></span>
+					</div>
+					<span class="product_name col_xs_5_12">Voucher</span><span class="qty col_xs_4_12"></span>
+					<div class="button_container col_xs_2_12">
+						<button type="button" class="remove_product btn primary xs" data-product-name="Voucher">-</button>
+					</div>
+				</li>				<li id="T-shirt" class="listed_product column_container unvisible">
+					<div class="img_container col_xs_1_12">
+						<span class="fi flaticon-tshirt"></span>
+					</div>
+					<span class="product_name col_xs_5_12">T-shirt</span><span class="qty col_xs_4_12"></span>
+					<div class="button_container col_xs_2_12">
+						<button type="button" class="remove_product btn primary xs" data-product-name="T-shirt">-</button>
+					</div>
+				</li>				<li id="Mug" class="listed_product column_container unvisible">
+					<div class="img_container col_xs_1_12">
+						<span class="fi flaticon-mug"></span>
+					</div>
+					<span class="product_name col_xs_5_12">Mug</span><span class="qty col_xs_4_12"></span>
+					<div class="button_container col_xs_2_12">
+						<button type="button" class="remove_product btn primary xs" data-product-name="Mug">-</button>
+					</div>
+				</li>			</ul>
+			<div class="button_container">
+				<button type="button" class="check_totals btn secondary">Checkout</button>
+			</div>
+		</section>
+	</div>
+</main>
+</body>
 </html>

@@ -3,8 +3,34 @@
 <head>
 	<title>Checkout test</title>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="scripts/checkout.js"></script>
 </head>
 <body>
 {{>header}}
+<main>
+	<div class="column_container">
+		<section id="available_product_list" class="col_xs_12_12 col_md_6_12">
+			<h1>Available products</h1>
+			<ul class="product_list">
+				{{#each this.products as |productVal|}}
+				{{>listed_product productVal}}
+				{{/each}}
+			</ul>
+		</section>
+		<section id="cart_totals" class="col_xs_12_12 col_md_6_12">
+			<h1>Checkout totals</h1>
+			<ul class="product_list">
+				<li>No products added</li>
+				{{#each this.products as |productVal|}}
+				{{>total_product productVal}}
+				{{/each}}
+			</ul>
+			<div class="button_container">
+				<button type="button" class="check_totals btn secondary">Checkout</button>
+			</div>
+		</section>
+	</div>
+</main>
 </body>
 </html>

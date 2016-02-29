@@ -1,0 +1,14 @@
+<li id="{{name}}" class="listed_product column_container unvisible">
+	<div class="img_container col_xs_1_12">
+	{{#if img}}
+		<img src="{{img}}" alt="{{name}}">
+	{{/if}}
+	{{#if icon_class}}
+		<span class="fi {{icon_class}}"></span>
+	{{/if}}
+	</div>
+	<span class="product_name col_xs_5_12">{{name}}</span><span class="qty col_xs_4_12"></span>
+	<div class="button_container col_xs_2_12">
+		<button type="button" class="remove_product btn primary xs" data-product-name="{{name}}">-</button>
+	</div>
+</li>
