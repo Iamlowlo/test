@@ -2,18 +2,18 @@ var appConfig = {
 	products : [
 		{
 			name:"Voucher",
-			img:"#",
-			value:5
+			icon_class:"flaticon-voucher",
+			price:5
 		},
 		{
 			name:"T-shirt",
-			img:"#",
-			value:20
+			icon_class:"flaticon-tshirt",
+			price:20
 		},
 		{
 			name:"Mug",
-			img:"#",
-			value:7.5
+			icon_class:"flaticon-mug",
+			price:7.5
 		}
 	],
 	discounts:[

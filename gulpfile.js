@@ -23,7 +23,7 @@ gulp.task('coffee-compile',function(){
 });
 
 gulp.task('hbs-compile',function(){
-	console.log(appConfig);
+	//console.log(appConfig);
 	var templateData= appConfig,
 		hbsOptions = {
 			ignorePartials : true,
@@ -38,13 +38,18 @@ gulp.task('hbs-compile',function(){
 		.pipe(gulp.dest('build'));
 });
 
+gulp.task('public',function(){
+	gulp.src('public/**/*')
+		.pipe(gulp.dest('build/assets'));
+});
+
 gulp.task('watch',function(){
 	gulp.watch('app/scss/**/*.scss',['scss-compile']);
 	gulp.watch('app/coffee/**/*.coffee',['coffee-compile']);
 	gulp.watch('app/views/**/*.hbs',['hbs-compile']);
 });
 
-gulp.task('serve',['watch'],function(){
+gulp.task('serve',['watch','public','scss-compile','coffee-compile','hbs-compile'],function(){
 	gulp.src('build')
 		.pipe(livereload({
 			livereload:true,
