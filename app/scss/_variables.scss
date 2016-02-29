@@ -2,6 +2,17 @@
 $color1_darkGrey: #3b4044;
 $color2_orange: #e4a416;
 $color3_lightGrey: #b0b5b9;
+$color4_blue: #4a8aca;
 
 $polite_white:#F2F2F2;
 $polite_black:#333;
+
+// Measures
+$column_gap:1rem;
+
+// BP
+$break-points:(
+  'xs' : 0,
+  'md' : 600,
+  'lg' : 1024
+);

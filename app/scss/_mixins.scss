@@ -1,0 +1,14 @@
+@mixin get_columns ($grid){
+	@each $bp,$bp_size in $break-points{
+		@media(min-width:#{$bp_size}px){
+			@for $col from 0 to $grid{
+				.col_#{$bp}_#{$col+1}_#{$grid}{
+					float: left;
+					width : floor(100/$grid*($col+1))+%;
+					padding-left: $column_gap;
+					padding-right: $column_gap;
+				}
+			}
+		}
+	}
+}

@@ -1,16 +1,60 @@
 @import 'reset';
 @import 'variables';
 @import 'fonts';
+@import 'mixins';
+@import 'utils';
 
-@import 'components/product_list';
+@import 'components/listed_product';
 
 body{
 	background: $polite_white;
 	font-family: 'Raleway'
 }
 
+@include get_columns(12);
+
 #main_header{
 	background: $color1_darkGrey;
 	color: white;
-	padding: 1.15em;
+	padding: 1.15em 0;
+	h1{
+		padding: 0 $column_gap;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+}
+
+main{
+	padding: $column_gap;
+	max-width: 800px;
+	margin: 0 auto;
+	h1{
+		padding-bottom: 1em;
+	}
+}
+
+.product_list{
+	@extend %clearfix;
+	list-style: none;
+	padding-bottom: $column_gap;
+}
+
+#cart_totals{
+	.button_container{
+		text-align: right;
+	}
+	@media (min-width: map-get($break-points, 'md')+'px'){
+		.listed_product{
+			text-align: right;
+			.product_name,
+			.img_container{
+				display: none;
+			}
+			.button_container,
+			.qty{
+				display: inline-block;
+				float:none;
+			}
+		}
+	}
 }

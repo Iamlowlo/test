@@ -1,0 +1,34 @@
+.listed_product{
+	padding-bottom: 1em;
+	.product_name,
+	.img_container .fi,
+	.price,
+	.qty,
+	.button_container{
+		vertical-align: middle;
+		line-height: 2rem;
+	}
+	.img_container{
+		max-height:100px;
+		img{
+			max-width: 100%;
+		}
+		.fi{
+			color: $color2_orange;
+			font-size: 1.4em;
+		}
+	}
+	.price{
+		text-align: right;
+		&:after{
+			content: '€';
+			margin-left: 0.5em;
+		}
+	}
+	.qty{
+		text-align: right;
+	}
+	.button_container{
+		text-align: right;
+	}
+}
