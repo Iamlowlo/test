@@ -43,6 +43,9 @@ main{
 	.button_container{
 		text-align: right;
 	}
+	.listed_product:first-child{
+		position: absolute;
+	}
 	@media (min-width: map-get($break-points, 'md')+'px'){
 		.listed_product{
 			text-align: right;
