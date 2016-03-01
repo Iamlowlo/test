@@ -14,7 +14,7 @@
 			<h1>Available products</h1>
 			<ul class="product_list">
 				{{#each this.products as |productVal|}}
-				{{>listed_product productVal}}
+				{{>listed_product productVal id=@index}}
 				{{/each}}
 			</ul>
 		</section>
@@ -23,7 +23,7 @@
 			<ul class="product_list">
 				<li>No products added</li>
 				{{#each this.products as |productVal|}}
-				{{>total_product productVal}}
+				{{>total_product productVal id=@index}}
 				{{/each}}
 			</ul>
 			<div class="button_container">

@@ -10,33 +10,42 @@ class Checkout
 		@cart[product].qty-- if @cart[product]?
 	total: () ->
 		@cart
-co = new Checkout 'pricingRules'
 
 $ ->
+	co={}
+	$.ajax
+		url: 'http://localhost:8001'
+		dataType: 'json'
+		error: (jqXHR) ->
+			console.log jqXHR
+		success: (data) ->
+			co = new Checkout data
+	
+
 	$cart_totals = $('#cart_totals')
 	$('#available_product_list').on "click",".add_product", (e) ->
 		e.preventDefault()
 		$('#cart_totals').find '.product_list li:first-child'
 			.addClass 'hidden'
-		co.scan $(this).data 'product-name'
-		productName = $(this).data 'product-name'
-		productList = $('#cart_totals').find('#'+ productName)
+		productId = 'product_' + $(this).data 'product'
+		productList = $('#cart_totals').find('#'+ productId)
+		co.scan productId
 		if productList.length
 			productList.removeClass 'unvisible'
 				.find '.qty'
-				.text co.cart[productName].qty
+				.text co.cart[productId].qty
 
 	$('#cart_totals').on "click",".remove_product", (e) ->
 		e.preventDefault()
-		productName = $(this).data 'product-name'
-		productList = $('#cart_totals').find('#'+ productName)
+		productId = 'product_' + $(this).data 'product'
+		productList = $('#cart_totals').find('#'+ productId)
 		if productList.length
-			co.unscan productName
-		if co.cart[productName].qty < 1
+			co.unscan productId
+		if co.cart[productId].qty < 1
 			productList.addClass 'unvisible'
 		else
 			productList.find '.qty'
-				.text co.cart[productName].qty
+				.text co.cart[productId].qty
 			
 	$cart_totals.on "click",".check_totals", (e) ->
-		console.log(co.total())
+		console.log co.total(),co.pricingRules

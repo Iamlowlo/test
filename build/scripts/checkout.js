@@ -1,4 +1,4 @@
-var Checkout, co;
+var Checkout;
 
 Checkout = (function() {
   function Checkout(pricingRules) {
@@ -31,37 +31,46 @@ Checkout = (function() {
 
 })();
 
-co = new Checkout('pricingRules');
-
 $(function() {
-  var $cart_totals;
+  var $cart_totals, co;
+  co = {};
+  $.ajax({
+    url: 'http://localhost:8001',
+    dataType: 'json',
+    error: function(jqXHR) {
+      return console.log(jqXHR);
+    },
+    success: function(data) {
+      return co = new Checkout(data);
+    }
+  });
   $cart_totals = $('#cart_totals');
   $('#available_product_list').on("click", ".add_product", function(e) {
-    var productList, productName;
+    var productId, productList;
     e.preventDefault();
     $('#cart_totals').find('.product_list li:first-child').addClass('hidden');
-    co.scan($(this).data('product-name'));
-    productName = $(this).data('product-name');
-    productList = $('#cart_totals').find('#' + productName);
+    productId = 'product_' + $(this).data('product');
+    productList = $('#cart_totals').find('#' + productId);
+    co.scan(productId);
     if (productList.length) {
-      return productList.removeClass('unvisible').find('.qty').text(co.cart[productName].qty);
+      return productList.removeClass('unvisible').find('.qty').text(co.cart[productId].qty);
     }
   });
   $('#cart_totals').on("click", ".remove_product", function(e) {
-    var productList, productName;
+    var productId, productList;
     e.preventDefault();
-    productName = $(this).data('product-name');
-    productList = $('#cart_totals').find('#' + productName);
+    productId = 'product_' + $(this).data('product');
+    productList = $('#cart_totals').find('#' + productId);
     if (productList.length) {
-      co.unscan(productName);
+      co.unscan(productId);
     }
-    if (co.cart[productName].qty < 1) {
+    if (co.cart[productId].qty < 1) {
       return productList.addClass('unvisible');
     } else {
-      return productList.find('.qty').text(co.cart[productName].qty);
+      return productList.find('.qty').text(co.cart[productId].qty);
     }
   });
   return $cart_totals.on("click", ".check_totals", function(e) {
-    return console.log(co.total());
+    return console.log(co.total(), co.pricingRules);
   });
 });
