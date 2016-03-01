@@ -4,7 +4,9 @@ It uses the following tools: Node, Gulp, Livereload, Handlebars, Scss and Coffes
 
 ## Get Started:
 - `npm install`
-- `gulp dev`  
+- `gulp dev`
+
+## What is doing on devEnv
 It will open the file `build/index.html` with the default browser on localhost:8000  
 Behind that task are:  
 - Http server launched on port 8001 with appConfig.
