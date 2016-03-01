@@ -6,7 +6,8 @@ var gulp = require('gulp'),
 	livereload = require('gulp-server-livereload'),
 	plumber = require('gulp-plumber'),
 	gutil = require('gulp-util'),
-	appConfig = require('./appConfig');
+	appConfig = require('./appConfig'),
+	http = require('http');
 
 gulp.task('scss-compile',function(){
 	gulp.src('app/scss/*.scss')
@@ -49,7 +50,15 @@ gulp.task('watch',function(){
 	gulp.watch('app/views/**/*.hbs',['hbs-compile']);
 });
 
-gulp.task('serve',['watch','public','scss-compile','coffee-compile','hbs-compile'],function(){
+gulp.task('server',function(){
+	var server = http.createServer(function(req,res){
+		res.writeHead(200,{'Content-Type':'application/json','Access-Control-Allow-Origin':'http://localhost:8000'});
+		res.end(JSON.stringify(appConfig))
+	})
+	server.listen(8001);
+})
+
+gulp.task('dev',['server','watch','public','scss-compile','coffee-compile','hbs-compile'],function(){
 	gulp.src('build')
 		.pipe(livereload({
 			livereload:true,
