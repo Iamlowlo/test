@@ -7,7 +7,7 @@ It uses the following tools: Node, Gulp, Livereload, Handlebars, Scss and Coffes
 - `gulp dev`
 
 ## What is that task doing?
-- Http server launched on port 8001 with appConfig.
+- Http server launched on port 8001 returning appConfig.
 - Sass, Handlebars and Coffe compilers and their watchers.
 - Public files copied on start-up.
 - It will open the file `build/index.html` with the default browser on localhost:8000
