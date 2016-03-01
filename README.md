@@ -2,13 +2,12 @@
 This project is a coding exercise to prove skills on coding.  
 It uses the following tools: Node, Gulp, Livereload, Handlebars, Scss and Coffescript.
 
-## Get Started:
+## Get Started
 - `npm install`
 - `gulp dev`
 
-## What is doing on devEnv
-It will open the file `build/index.html` with the default browser on localhost:8000  
-Behind that task are:  
+## What is that task doing?
 - Http server launched on port 8001 with appConfig.
 - Sass, Handlebars and Coffe compilers and their watchers.
 - Public files copied on start-up.
+- It will open the file `build/index.html` with the default browser on localhost:8000
