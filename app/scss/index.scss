@@ -43,8 +43,23 @@ main{
 	.button_container{
 		text-align: right;
 	}
-	.listed_product:first-child{
-		position: absolute;
+	.product_list{
+		padding-bottom: 0;
+		li:first-child{
+			position: absolute;
+		}
+	}
+	.total{
+		border-top: 1px solid $color1_darkGrey;
+		padding: 0.4em 0 1.4em;
+		.price{
+			text-align: right;
+			height: 1em;
+			font-size: 1.5em;
+			&:after{
+				content: '€'
+			}
+		}
 	}
 	@media (min-width: map-get($break-points, 'md')+'px'){
 		.listed_product{

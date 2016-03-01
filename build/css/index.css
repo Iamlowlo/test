@@ -168,7 +168,7 @@ input, select {
 .hidden {
   display: none !important; }
 
-.unvisible {
+.invisible {
   visibility: hidden !important; }
 
 .btn {
@@ -434,8 +434,20 @@ main {
 #cart_totals .button_container {
   text-align: right; }
 
-#cart_totals .listed_product:first-child {
-  position: absolute; }
+#cart_totals .product_list {
+  padding-bottom: 0; }
+  #cart_totals .product_list li:first-child {
+    position: absolute; }
+
+#cart_totals .total {
+  border-top: 1px solid #3b4044;
+  padding: 0.4em 0 1.4em; }
+  #cart_totals .total .price {
+    text-align: right;
+    height: 1em;
+    font-size: 1.5em; }
+    #cart_totals .total .price:after {
+      content: '€'; }
 
 @media (min-width: 600px) {
   #cart_totals .listed_product {
