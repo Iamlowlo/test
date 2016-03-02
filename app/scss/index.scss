@@ -47,6 +47,7 @@ main{
 		padding-bottom: 0;
 		li:first-child{
 			position: absolute;
+			line-height: 2em;
 		}
 	}
 	.total{
@@ -62,6 +63,9 @@ main{
 		}
 	}
 	@media (min-width: map-get($break-points, 'md')+'px'){
+		h1{
+			text-align: right;
+		}
 		.listed_product{
 			text-align: right;
 			.product_name,
