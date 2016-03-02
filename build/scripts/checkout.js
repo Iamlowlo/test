@@ -9,6 +9,19 @@ Checkout = (function() {
 
   Checkout.prototype.totalPrice = 0;
 
+  Checkout.prototype.discountMethods = {
+    t2p1: function(productPrice, qty) {
+      return (productPrice * (qty - (qty % 2)) / 2) + productPrice * (qty % 2);
+    },
+    bulk: function(productPrice, qty) {
+      if (qty < 3) {
+        return productPrice * qty;
+      } else {
+        return productPrice * 0.95 * qty;
+      }
+    }
+  };
+
   Checkout.prototype.scan = function(product) {
     if (this.cart[product] != null) {
       return this.cart[product].qty++;
@@ -21,18 +34,28 @@ Checkout = (function() {
 
   Checkout.prototype.unscan = function(product) {
     if (this.cart[product] != null) {
-      return this.cart[product].qty--;
+      this.cart[product].qty--;
+    }
+    if (this.cart[product].qty < 1) {
+      return this.cart.splice(product, 1, void 0);
     }
   };
 
   Checkout.prototype.total = function() {
-    var i, j, len, product, ref;
+    var i, j, len, pricingRulesProduct, product, ref;
     this.totalPrice = 0;
     ref = this.cart;
     for (i = j = 0, len = ref.length; j < len; i = ++j) {
       product = ref[i];
       if (product != null) {
-        this.totalPrice += product.qty * this.pricingRules.products[i].price;
+        pricingRulesProduct = this.pricingRules.products[i];
+        if ((pricingRulesProduct.discount != null) && (this.discountMethods[pricingRulesProduct.discount] != null)) {
+          this.totalPrice += this.discountMethods[pricingRulesProduct.discount](pricingRulesProduct.price, product.qty);
+        } else {
+          if (product != null) {
+            this.totalPrice += product.qty * this.pricingRules.products[i].price;
+          }
+        }
       }
     }
     return this.totalPrice;
@@ -61,7 +84,7 @@ $(function() {
     var productId, productList;
     e.preventDefault();
     $totalPrice.addClass('invisible');
-    $('#cart_totals').find('.product_list li:first-child').addClass('hidden');
+    $cart_totals.find('.product_list li:first-child').addClass('hidden');
     productId = $(this).data('product');
     productList = $('#cart_totals').find('#product_' + productId);
     co.scan(productId);
@@ -75,17 +98,14 @@ $(function() {
     $totalPrice.addClass('invisible');
     productId = $(this).data('product');
     productList = $('#cart_totals').find('#product_' + productId);
-    if (productList.length) {
-      co.unscan(productId);
-    }
-    if (co.cart[productId].qty < 1) {
+    co.unscan(productId);
+    if (co.cart[productId] == null) {
       return productList.addClass('invisible');
     } else {
       return productList.find('.qty').text(co.cart[productId].qty);
     }
   });
   return $cart_totals.on("click", ".check_totals", function(e) {
-    $totalPrice.text(co.total()).removeClass('invisible');
-    return console.log(co.total(), co.pricingRules);
+    return $totalPrice.text(co.total()).removeClass('invisible');
   });
 });

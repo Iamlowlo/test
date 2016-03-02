@@ -146,11 +146,11 @@ input, select {
 .flaticon-tshirt:before {
   content: "\f101"; }
 
-.flaticon-cart:before {
-  content: "\f102"; }
-
 .flaticon-voucher:before {
   content: "\f103"; }
+
+.flaticon-cart:before {
+  content: "\f102"; }
 
 .column_container:after, .product_list:after,
 .clearfix:after {
@@ -437,7 +437,8 @@ main {
 #cart_totals .product_list {
   padding-bottom: 0; }
   #cart_totals .product_list li:first-child {
-    position: absolute; }
+    position: absolute;
+    line-height: 2em; }
 
 #cart_totals .total {
   border-top: 1px solid #3b4044;
@@ -450,6 +451,8 @@ main {
       content: '€'; }
 
 @media (min-width: 600px) {
+  #cart_totals h1 {
+    text-align: right; }
   #cart_totals .listed_product {
     text-align: right; }
     #cart_totals .listed_product .product_name,
