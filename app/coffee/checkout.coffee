@@ -2,6 +2,11 @@ class Checkout
 	constructor: (@pricingRules) ->
 	cart:[]
 	totalPrice:0
+	discountMethods:
+		t2p1: (productPrice, qty)->
+			(productPrice*(qty-(qty%2))/2)+productPrice*(qty%2)
+		bulk: (productPrice, qty)->
+			if qty<3 then productPrice*qty else productPrice*0.95*qty
 	scan: (product) ->
 		if @cart[product]?
 			@cart[product].qty++ 
@@ -9,10 +14,16 @@ class Checkout
 			@cart[product] = {'qty':1}
 	unscan: (product) ->
 		@cart[product].qty-- if @cart[product]?
+		@cart.splice product,1,undefined if @cart[product].qty<1
 	total: () ->
 		@totalPrice=0
 		for product,i in @cart
-			@totalPrice+=product.qty*@pricingRules.products[i].price if product?
+			if product?
+				pricingRulesProduct = @pricingRules.products[i]
+				if pricingRulesProduct.discount? and @discountMethods[pricingRulesProduct.discount]?
+					@totalPrice+=@discountMethods[pricingRulesProduct.discount](pricingRulesProduct.price,product.qty)
+				else
+					@totalPrice+=product.qty*@pricingRules.products[i].price if product?
 		@totalPrice
 
 $ ->
@@ -31,7 +42,7 @@ $ ->
 	$('#available_product_list').on "click",".add_product", (e) ->
 		e.preventDefault()
 		$totalPrice.addClass 'invisible'
-		$('#cart_totals').find '.product_list li:first-child'
+		$cart_totals.find '.product_list li:first-child'
 			.addClass 'hidden'
 		productId = $(this).data 'product'
 		productList = $('#cart_totals').find('#product_'+ productId)
@@ -46,9 +57,8 @@ $ ->
 		$totalPrice.addClass 'invisible'
 		productId = $(this).data 'product'
 		productList = $('#cart_totals').find('#product_'+ productId)
-		if productList.length
-			co.unscan productId
-		if co.cart[productId].qty < 1
+		co.unscan productId
+		if !co.cart[productId]?
 			productList.addClass 'invisible'
 		else
 			productList.find '.qty'
@@ -57,4 +67,3 @@ $ ->
 	$cart_totals.on "click",".check_totals", (e) ->
 		$totalPrice.text co.total()
 			.removeClass 'invisible'
-		console.log co.total(),co.pricingRules
